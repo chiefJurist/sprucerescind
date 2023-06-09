@@ -1,4 +1,4 @@
-<?php 
+Spruce Rescind<?php 
     //CONNECT TO DATABASE
     include("config/connect.php");
 
@@ -53,7 +53,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Smart-remit</title>
+        <title>Spruce Rescind</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="//code.tidio.co/wkz2mp6tlkdssyyhfkf7hxvde5fxcxoi.js" async></script>
@@ -170,7 +170,7 @@
             </form>
         </div>
         <footer>
-            <p>Copyright © Smart-remit 2023. All Rights Reserved</p>
+            <p>Copyright © Spruce Rescind 2023. All Rights Reserved</p>
         </footer>
     </body>
 </html>

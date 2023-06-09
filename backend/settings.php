@@ -31,7 +31,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>smart-remit</title>
+        <title>Spruce Rescind</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -201,7 +201,7 @@
         </div>       
 
         <footer>
-            <p>Copyright © Smart-remit 2023. All Rights Reserved</p>
+            <p>Copyright © Spruce Rescind 2023. All Rights Reserved</p>
         </footer>
     </body>
 </html>

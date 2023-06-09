@@ -74,7 +74,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>smart remit</title>
+        <title>Spruce Rescind</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -549,7 +549,7 @@
     <body>
         <header onclick="unDepositPop(), unTransferPop(), unWithdrawPop()">
             <div class="header-icon"><button onclick="menu()">&#8801</button></div>
-            <div class="header-icon" id="smart-remit">SMART-REMIT</div>
+            <div class="header-icon" id="smart-remit">Spruce Rescind</div>
             <div class="header-icon"><button><a href="settings.php" class="purple"><ion-icon name="settings-outline"></ion-icon></a></button></div>
         </header>
         <section id="body" onclick="unmenu()">
@@ -590,7 +590,7 @@
             <?php }?>
         </section>
         <footer onclick="unmenu()">
-            <div id="copyright">Copyright © Smart-remit 2023. All Rights Reserved</div>
+            <div id="copyright">Copyright © Spruce Rescind 2023. All Rights Reserved</div>
             <div id="foot-icons">
                 <div class="icons-div">
                     <button>

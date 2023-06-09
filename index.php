@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="//code.tidio.co/wkz2mp6tlkdssyyhfkf7hxvde5fxcxoi.js" async></script>
-        <title>smart-remit</title>
+        <title>SpruceRescind</title>
         <link rel="shortcut icon" href="img/web-logo.png">
         <meta name="description" content="Our goal is to help our companies and user's maintain and achieve best position team work occurings">
         <meta name="keywords" content="banks, dollar, naira, paypal">
@@ -1019,7 +1019,7 @@
                         <div class="contact-icon"><ion-icon name="call-outline" class="con-icon"></ion-icon></div>
                         <div class="contact-det">
                             <p>Front Desk</p>
-                            <h2>451 9539<br>admin@smart-remit.com</h2>
+                            <h2>451 9539<br>admin@sprucerescind.com</h2>
                         </div>
                     </div>
                 </div>
