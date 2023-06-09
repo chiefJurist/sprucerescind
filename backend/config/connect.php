@@ -1,9 +1,9 @@
 <?php 
     // Connect to the database
     $servername = 'localhost';
-    $username = 'smart-remit-admins';
-    $password = '$smart-remit-admins$';
-    $dbname = 'smart-remit-database';
+    $username = 'chiefJurist';
+    $password = '#Chibueze2003';
+    $dbname = 'sprucerescind';
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     //Checking the connection
