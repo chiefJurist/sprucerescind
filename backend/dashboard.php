@@ -25,7 +25,7 @@
 
     //FOR TRANSACTION HISTORY
     //writing query
-    $sql = "SELECT * FROM transactions WHERE user_id = $id";
+    $sql = "SELECT * FROM transactions WHERE user_id = $id ORDER BY created_at DESC";
 
     //Get the query result
     $result = mysqli_query($conn, $sql);
@@ -243,10 +243,8 @@
             }
             #status{
                 font-size: large;
-                color: green;
             }
             #type{
-                color: blueviolet;
                 font-size: small;
             }
             #amount{
