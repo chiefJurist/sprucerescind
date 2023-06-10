@@ -152,7 +152,7 @@
     </head>
     <body>
         <div id="log-in">
-            <p id="password-link"><a href="forgotPassWord.php">Forgot Password</a></p>
+            <p id="password-link"><a href="forgotPassword.php">Forgot Password</a></p>
             <p id="reg-link">(Don't have an account?)<a href="register.php">Register</a></p>
             <h2>Log in</h2>
             <p>Fill the form to log in</p>
