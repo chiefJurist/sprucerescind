@@ -49,17 +49,19 @@
             $errors["error"] = "Insufficient balance";
         }
 
-        //make query and insert data
-        $sql2 = "INSERT INTO transactions(type, status, amount, user_id) VALUES('transfer','pending', '$recipientAmount', $id)";
+        if (!array_filter($errors)) {
+            //make query and insert data
+            $sql2 = "INSERT INTO transactions(type, status, amount, user_id) VALUES('transfer','pending', '$recipientAmount', $id)";
 
-        //check and redirect
-        if (mysqli_query($conn, $sql2)) {
-            //Save data to transfer table for more info
-            $sql3 = "INSERT INTO transfer(amount, account, user_id) VALUES('$recipientAmount', '$recipientNumber', $id)";
+            //check and redirect
+            if (mysqli_query($conn, $sql2)) {
+                //Save data to transfer table for more info
+                $sql3 = "INSERT INTO transfer(amount, account, user_id) VALUES('$recipientAmount', '$recipientNumber', $id)";
 
-            if ( mysqli_query($conn, $sql3)) {
-                //success
-                header('Location: dashboard.php');
+                if ( mysqli_query($conn, $sql3)) {
+                    //success
+                    header('Location: dashboard.php');
+                }
             }
         }
     }
