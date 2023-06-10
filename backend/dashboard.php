@@ -123,6 +123,26 @@
                 element.classList.remove("un-hide-4");
                 element.classList.add("hide");
             }
+            function hideBalance() {
+                const element = document.getElementById("balanceH2");
+                if (element.innerHTML != "*******") {
+                    element.innerHTML = "*******" ;
+                    element.classList.add('enlarge');
+                }else{
+                    element.innerHTML = "$<?php echo number_format($balance, 2) ?> USD";
+                    element.classList.remove('enlarge');
+                }
+            }
+            function hideBalance2() {
+                const element = document.getElementById("balanceH22");
+                if (element.innerHTML != "*******") {
+                    element.innerHTML = "*******" ;
+                    element.classList.add('enlarge');
+                }else{
+                    element.innerHTML = "$<?php echo number_format($balance, 2) ?> USD";
+                    element.classList.remove('enlarge');
+                }
+            }
         </script>
         <style>
             *{
@@ -130,6 +150,9 @@
                 padding: 0;
                 box-sizing: border-box;
                 font-family: Arial, Helvetica, sans-serif;
+            }
+            .enlarge{
+                font-size: 3rem;
             }
             body{
                 background-color: rgb(255, 248, 255);
@@ -557,7 +580,7 @@
                 <div id="bal-add">
                     <div id="bal">
                         <p>Total Balance</p>
-                        <h2>$<?php echo number_format($balance, 2) ?> USD</h2>
+                        <h2 id="balanceH2" onclick="hideBalance()">$<?php echo number_format($balance, 2) ?> USD</h2>
                     </div>
                     <div id="add">
                         <button onclick="depositPop()"><ion-icon name="add-outline"></ion-icon></button>
@@ -638,7 +661,7 @@
            </div>
             <div id="menu-head">
                 <p>Balance</p>
-                <h2>$<?php echo number_format($balance, 2) ?></h2>
+                <h2 id="balanceH22" onclick="hideBalance2()">$<?php echo number_format($balance, 2) ?></h2>
                 <div id="actions-cont">
                     <div class="actions">
                         <button id="menu-dep-btn" onclick="depositPop(), unmenu()">+</button>
