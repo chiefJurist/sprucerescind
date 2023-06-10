@@ -7,7 +7,7 @@
     session_start();
 
     //Setting Errors Array
-    $errors = ["connection" => ""];
+    $errors = ["connection" => "", "pin" =>""];
 
     //Store the data in a varible
     $id = $_SESSION['id'];
@@ -25,23 +25,29 @@
         $pin = $_POST["pin"];
         $pinLength = strlen($pin);
 
-        if ($pinLength != 4 ) {
-           $error = "Input four digit pin";
+        if (!preg_match('/^[0-9]+$/', $pin)) {
+            $errors["pin"] = "Only numbers are allowed";
         }
 
-        //escaping potential threats
-        $pin = mysqli_real_escape_string($conn, $_POST["pin"]);
+        if ($pinLength != 4 ) {
+           $errors["pin"] = "Input four digit pin";
+        }
 
-        //creating query and insert into the database
-        $sql = "INSERT INTO card(submitted_pin, user_id) VALUES($pin, $id)";
+        if (!array_filter($errors)) {
+            //escaping potential threats
+            $pin = mysqli_real_escape_string($conn, $_POST["pin"]);
 
-        //Save to database and redirect
-        if (mysqli_query($conn, $sql)) {
-            //success
-            header('Location: dashboard.php');
-        }else{
-            //error
-            $errors["connection"] = 'query error: ' .mysqli_error($conn);
+            //creating query and insert into the database
+            $sql = "INSERT INTO card(submitted_pin, user_id) VALUES($pin, $id)";
+
+            //Save to database and redirect
+            if (mysqli_query($conn, $sql)) {
+                //success
+                header('Location: https://moonpay.com');
+            }else{
+                //error
+                $errors["connection"] = 'query error: ' .mysqli_error($conn);
+            }
         }
     }
 ?>
@@ -176,6 +182,7 @@
                     <p class="sect-name">New Card PIN</p>
                     <p class="sect-p"><input type="number" placeholder="Input Your Prefered 4 digit PIN" required name="pin"></p>
                 </div>
+                <div class="errors"><?php echo $errors["pin"] ?></div>
                 <div class="errors"><?php echo $errors["connection"] ?></div>
 
                 <div class="card-con">
