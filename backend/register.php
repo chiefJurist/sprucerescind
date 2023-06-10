@@ -3,10 +3,10 @@
     include("config/connect.php");
 
     //Setting the fields as they will load
-    $email = $name = $password = $password2 = $country = "";
+    $email = $name = $password = $password2 = $country = $dob = $phone = $nin = $gender = "";
 
     //SETTING THE ERRORS ARRAY 
-    $errors = ["email" => "", "name" => "", "password" => "", "country" => "", "accWarn" => ""];
+    $errors = ["email"=>"", "name"=>"", "password"=>"", "country"=>"", "accWarn" => "", "dob"=>"", "phone"=>"", "nin"=>"", "gender"=>""];
 
     //CHECKING IF THE FORMS HAVE BEEN SUBMITTED
     if (isset($_POST["register"])) {
@@ -48,6 +48,35 @@
             $errors["accWarn"] = "You already have an account";
         }
 
+        //Validate The Date of Birth
+        $dob = $_POST["dob"];
+        if (empty($dob)) {
+            $errors["dob"] = "Please input your date of birth";
+        }
+
+        //Validate the phone number
+        $phone = $_POST["phone"];
+        if (empty($phone)) {
+            $errors["phone"] = "Please input a valid phone number";
+        }elseif (!preg_match('/^(?:\+\d{1,3}\s?)?(?:\(\d{1,3}\)\s?)?(?:\d{1,4}\s?-?){1,5}\d{1,4}$/', $phone)) {
+            $errors["phone"] = "Please input a valid phone number";
+        }
+
+        //Validating NIN
+        $nin = $_POST["nin"];
+        if (!empty($nin)) {
+            if (!preg_match('/^[a-zA-Z0-9]+$/', $nin)) {
+                $errors["nin"] = "Your National Identity number should contain only letters and numbers";
+            }
+        }
+
+        //Validating The gender
+        $gender = $_POST['gender'];
+        if (empty($gender)) {
+            $errors["gender"] = "Gender is Required";
+        }
+
+
 
         //FOR REDIRECTING AND DATABASE MANIPULATION
         if (!array_filter($errors)) {
@@ -63,9 +92,13 @@
             $hashed = password_hash($password, PASSWORD_DEFAULT);
             $hash = mysqli_real_escape_string($conn, $hashed);
             $country = mysqli_real_escape_string($conn, $_POST['country']);
+            $dob = mysqli_real_escape_string($conn, $_POST['dob']);
+            $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+            $nin = mysqli_real_escape_string($conn, $_POST['nin']);
+            $gender = mysqli_real_escape_string($conn, $_POST['gender']);
 
             //Create SQL
-            $sql = "INSERT INTO users(name, email, password, country, balance, account_number) VALUES('$name', '$email', '$hash', '$country', '$balance', '$account')";
+            $sql = "INSERT INTO users(name, email, password, country, balance, account_number, dob, phone_number, nin, gender) VALUES('$name', '$email', '$hash', '$country', '$balance', '$account', '$dob', '$phone', '$nin', '$gender')";
 
             //Redirecting
             if (mysqli_query($conn, $sql)) {
@@ -174,38 +207,63 @@
             <div class="errors"><?php echo $errors["accWarn"] ?></div>
             <form action="register.php" method="POST">
                 <div class="input-field">
-                    <label class="in-label">Full Name</label><br>
+                    <label class="in-label">Full Name*</label><br>
                     <input type="text" placeholder="Your full name" class="in-input" name="name" value="<?php echo $name ?>">
                 </div>
                 <div class="errors"><?php echo $errors["name"] ?></div>
 
                 <div class="input-field">
-                    <label class="in-label">E-mail</label><br>
+                    <label class="in-label">E-mail*</label><br>
                     <input type="email" name="email" id="email" class="in-input" placeholder="Your Email" required value="<?php echo $email ?>">
                 </div>
                 <div class="errors"><?php echo $errors["email"] ?></div>
 
                 <div class="input-field">
-                    <label class="in-label">Password</label><br>
+                    <label class="in-label">Password*</label><br>
                     <input type="password" name="password" id="password" placeholder="Input New Password" class="in-input" required value="<?php echo $password ?>">
                 </div>
                 <div class="errors"><?php echo $errors["password"] ?></div>
 
                 <div class="input-field">
-                    <label class="in-label">Password Again</label><br>
+                    <label class="in-label">Password Again*</label><br>
                     <input type="password" name="password2" id="password" placeholder="Input password again" class="in-input" required value="<?php echo $password2 ?>">
                 </div>
                 <div class="errors"><?php echo $errors["password"] ?></div>
 
                 <div class="input-field">
-                    <label class="in-label">Country Of origin</label>
+                    <label class="in-label">Country Of origin*</label>
                     <input type="text" placeholder="Your Country Of Origin" required class="in-input" name="country" value="<?php echo $country ?>">
                 </div>
                 <div class="errors"><?php echo $errors["country"] ?></div>
 
+                <div class="input-field">
+                    <label class="in-label">Date of Birth*</label>
+                    <input type="date" name="dob" id="dob" class="in-input" required>
+                </div>
+                <div class="errors"><?php echo $errors["dob"] ?></div>
+                
+                <div class="input-field">
+                    <label class="in-label">Phone Number*</label>
+                    <input type="tel" name="phone" id="phone" placeholder="input your phone number" class="in-input" required value="<?php echo $phone ?>">
+                </div>
+                <div class="errors"><?php echo $errors["phone"] ?></div>
+
+                <div class="input-field">
+                    <label class="in-label">ID Card Number</label>
+                    <input type="number" name="nin" id="nin" placeholder="Input your National Idendity Card Number" class="in-input" value="<?php echo $nin ?>">
+                </div>
+                <div class="errors"><?php echo $errors["nin"] ?></div>
+
+                <div class="input-field">
+                    <label class="in-label">Gender*</label>
+                    <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="female">female
+                    <input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?> value="male">male 
+                </div>
+                <div class="errors"><?php echo $errors["gender"] ?></div>
+
                 <div id="terms">
-                    <input type="radio" name="radio" id="radio">
-                    I accept the <a href="#">terms and conditions</a>
+                    <input type="radio" name="radio" id="radio" required>
+                    I accept the <a href="#">terms and conditions*</a>
                 </div>
 
                 <div id="reg-btn-div">
