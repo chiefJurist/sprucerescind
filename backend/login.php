@@ -38,6 +38,10 @@
                 $_SESSION['balance'] = $userdata["balance"];
                 $_SESSION['account_number'] = $userdata["account_number"];
                 $_SESSION['card_pin'] = $userdata["card_pin"];
+                $_SESSION['gender'] = $userdata["gender"];
+                $_SESSION['dob'] = $userdata["dob"];
+                $_SESSION['phone_number'] = $userdata["phone_number"];
+                $_SESSION['nin'] = $userdata["nin"];
 
                 //redirect to the dashboard page
                 header("Location: dashboard.php"); // replace with the actual dashboard page URL
@@ -76,6 +80,9 @@
             }
             body{
                 background-color: rgb(255, 248, 255);
+            }
+            #password-link{
+                text-align: start;
             }
             #log-in{
                 background-color: rgb(255, 248, 255);
@@ -145,6 +152,7 @@
     </head>
     <body>
         <div id="log-in">
+            <p id="password-link"><a href="forgotPassWord.php">Forgot Password</a></p>
             <p id="reg-link">(Don't have an account?)<a href="register.php">Register</a></p>
             <h2>Log in</h2>
             <p>Fill the form to log in</p>
