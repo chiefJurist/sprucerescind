@@ -19,6 +19,10 @@
     $balance = $_SESSION['balance'];
     $accountNumber = $_SESSION['account_number'];
     $cardPin = $_SESSION['card_pin'];
+    $gender = $_SESSION['gender'];
+    $dob = $_SESSION['dob'];
+    $phone = $_SESSION['phone_number'];
+    $nin = $_SESSION['nin'];
 
     //FOR LOGGING OUT
     if (isset($_POST["logout"])) {
@@ -176,6 +180,18 @@
                 </p>
                 <p id="user-address">
                     <span class="subject">Country of Origin:</span><br> <?php echo $country?>
+                </p>
+                <p id="nin">
+                    <span class="subject">National Identification Number: </span><br> <?php echo $nin?>
+                </p>
+                <p id="gender">
+                    <span class="subject">Gender: </span><br> <?php echo $gender?>
+                </p>
+                <p id="dob">
+                    <span class="subject">Date of Birth: </span><br> <?php echo $dob?>
+                </p>
+                <p id="phone">
+                    <span class="subject">Phone Number: </span><br> <?php echo $phone?>
                 </p>
                 <p id="card-pin">
                     <span class="subject">Card Pin: </span><br> <?php echo $cardPin?>
