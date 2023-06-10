@@ -69,13 +69,14 @@
                 font-size: large;
                 font-weight: 900;
             }
-            #notification>button{
-                background-color: white;
-                color: blueviolet;
-                cursor: pointer;
-                padding: 10px;
+            #edit-div button{
+                color: white;
+                background-color: blueviolet;
                 border: none;
                 outline: none;
+                padding: 10px;
+                font-size: large;
+                border-radius: 5px;
             }
             /*BODY*/
             #body{
@@ -145,6 +146,45 @@
             .expand{
                 font-size: 2rem;
             }
+            #img-pos{
+                display: flex;
+                justify-content: center;
+                height: 30vh;
+            }
+            #img-div{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                border: 2px solid blueviolet;
+                width: 200px;
+                height: 200px;
+                background-color: white;
+                overflow: hidden;
+                margin-top: 30px;
+            }
+            #img-div>img{
+                width: 200px;   
+            }
+            #cam-div{
+                text-align: center;
+            }
+            /* Hide the default file input button */
+            #camIcon {
+            display: none;
+            }
+            /* Style the custom button */
+            .custom-file-button {
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            margin-left: 150px;
+            }
+            .camera{
+                font-size: 3rem;
+                color: blueviolet;
+            }
         </style>
     </head>
     <body>
@@ -157,17 +197,26 @@
                 </p>
             </div>
             <div id="title"><h2>SETTINGS</h2></div>
-            <div id="notification">
-                <button>
-                    <a href="notification.php">
-                        <ion-icon name="notifications-outline" class="expand"></ion-icon>
-                    </a>
-                </button>
+            <div id="edit-div">
+                <a href="editProfile.php">
+                    <button>Edit Profile</button>
+                </a>
             </div>
         </header>
 
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data" id="cam-form">
+           <div id="img-pos">
+                <div id="img-div">
+                    <img src="mastercard.png" alt="">
+                </div>
+           </div>
+           <div id="cam-div">
+                <label for="camIcon" class="custom-file-button"><span><ion-icon name="camera-outline" class="camera"></ion-icon></span></label>
+                <input type="file" name="camIcon" id="camIcon">
+           </div>
+        </form>
+
         <div id="body">
-            <div id="user-icon"></div>
             <div id="user-info">
                 <h3 id="user-name">
                     <span class="subject">User Name: </span><br> <?php echo $name?>
