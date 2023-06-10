@@ -155,15 +155,24 @@
                 text-align: center;
                 padding-top: 20px;
             }
+            #img-div{
+                text-align: center;
+            }
+            #img-div>img{
+                width: 300px;
+            }
         </style>
     </head>
     <body>
         <div id="body">
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 <div id="receipt">Receipt#</div>
+                <div id="img-div">
+                    <img src="mastercard.png" alt="card">
+                </div>
                 <div class="errors"><?php echo $errors["connection"] ?></div>
                 <div id="instruction">Enter your virtual card pin to complete transaction</div>
-                <div id="input-div"><input type="number" name="pin" id="input" required></div>
+                <div id="input-div"><input type="password" name="pin" id="input" maxlength="4" required></div>
                 <div id="confirm">
                     <p>$ <input type="number" id="amount" placeholder="Confirm Amount" name="amount" required></p>
                 </div>
