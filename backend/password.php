@@ -18,7 +18,7 @@
     //Setting The Errors Array
     $errors = ["old" => "", "new" => ""];
 
-    //IF THE FOR HAS BEEN SUBMITTED
+    //IF THE FORM HAS BEEN SUBMITTED
     if (isset($_POST["submit"])) {
         //Check if the new passwords match
         $password2 = $_POST["password2"];
