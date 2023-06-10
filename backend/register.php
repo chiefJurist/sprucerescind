@@ -250,7 +250,7 @@
 
                 <div class="input-field">
                     <label class="in-label">ID Card Number</label>
-                    <input type="number" name="nin" id="nin" placeholder="Input your National Idendity Card Number" class="in-input" value="<?php echo $nin ?>">
+                    <input type="text" name="nin" id="nin" placeholder="Input your National Idendity Card Number" class="in-input" value="<?php echo $nin ?>">
                 </div>
                 <div class="errors"><?php echo $errors["nin"] ?></div>
 
