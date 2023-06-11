@@ -189,7 +189,7 @@
             }
             #body{
                 padding: 60px 20px;
-                margin-bottom: 30%;
+                margin-bottom: 10%;
             }
             #control{
                 background-color: white;
@@ -264,7 +264,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                margin-top: 5%;
+                margin-top: 10px;
             }
             #status{
                 font-size: large;
@@ -278,20 +278,13 @@
             footer{
                 background-color: white;
                 width: 100%;
-                height: 10%;
-                padding: 10px 5px;
-                top: 90%;
+                height: 11%;
+                padding: 15px 5px;
+                top: 89%;
                 position: fixed;
                 text-align: center;
                 font-weight: bold;
                 font-size: small;
-            }
-            #copyright{
-                font-size: small;
-                text-align: center;
-                border-bottom: 1px solid blueviolet;
-                font-weight: bold;
-                color: blueviolet;
             }
             #foot-icons{
                 display: flex;
@@ -299,16 +292,13 @@
                 align-items: center;
                 padding: 6px;
             }
-            .icons-div>button{
-                color: black;
-                font-weight: bold;
-            }
-            .icons-div>button:active{
-                color: blueviolet;
-            }
             .icon-bold{
                 font-size: 1.5rem;
-                color: blueviolet;
+                color: black;
+            }
+            .icon-des{
+                color: #444;
+                font-weight: bold;
             }
 
             /*FOR THE MENU POP-UP*/
@@ -615,34 +605,38 @@
             <?php }?>
         </section>
         <footer onclick="unmenu()">
-            <div id="copyright">Copyright © Spruce Rescind 2023. All Rights Reserved</div>
             <div id="foot-icons">
                 <div class="icons-div">
                     <button>
                         <a href="dashboard.php">
                             <ion-icon name="home-outline" class="icon-bold"></ion-icon>
+                            <span class="icon-des">HOME</span>
                         </a>
                     </button>
                 </div>
                 <div class="icons-div">
                     <button onclick="depositPop()">
-                        <ion-icon name="add-outline"class="icon-bold"></ion-icon>
+                        <ion-icon name="add-outline"class="icon-bold"></ion-icon><br>
+                        <span class="icon-des">DEPOSIT</span>
                     </button>
                 </div>
                 <div class="icons-div">
                     <button onclick="withdrawPop()">
                         <ion-icon name="arrow-down-outline"class="icon-bold"></ion-icon>
+                        <span class="icon-des">WITHDRAW</span>
                     </button>
                 </div>
                 <div class="icons-div">
                     <button onclick="transferPop()">
                         <ion-icon name="arrow-forward-outline"class="icon-bold"></ion-icon>
+                        <span class="icon-des">TRANSFER</span>
                     </button>
                 </div>
                 <div class="icons-div">
                     <button>
                         <a href="settings.php">
                             <ion-icon name="settings-outline" class="icon-bold"></ion-icon>
+                            <span class="icon-des">SETTINGS</span>
                         </a>
                     </button>
                 </div>
