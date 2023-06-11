@@ -45,8 +45,10 @@
         $recipientNumber = mysqli_real_escape_string($conn, $_POST["recipientnumber"]);
         $recipientAmount = mysqli_real_escape_string($conn, $_POST["recipientamount"]);
 
-        if ($balance > $recipientAmount) {
+        if ($recipientAmount > $balance) {
             $errors["error"] = "Insufficient balance";
+        }elseif ($recipientAmount < 50) {
+            $errors["error"] = "Minimum amount allowed transfer is $50";
         }
 
         if (!array_filter($errors)) {
