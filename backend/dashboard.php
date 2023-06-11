@@ -603,13 +603,15 @@
             </div>
             <h2>Transactions</h2>
             <?php foreach ($transactions as $transaction) {?>
-                <div id="transactions">
-                        <div>
-                            <span id="status"><?php echo $transaction["status"] ?></span><br>
-                            <span id="type"><?php echo $transaction["type"] ?></span>
-                        </div>
-                        <div id="amount">$<?php echo $transaction["amount"] ?></div>
-                </div>
+                <a href="details.php?id=<?php echo $transaction['id']?>">
+                    <div id="transactions">
+                            <div>
+                                <span id="status"><?php echo $transaction["status"] ?></span><br>
+                                <span id="type"><?php echo $transaction["type"] ?></span>
+                            </div>
+                            <div id="amount">$<?php echo $transaction["amount"] ?></div>
+                    </div>
+                </a>
             <?php }?>
         </section>
         <footer onclick="unmenu()">
