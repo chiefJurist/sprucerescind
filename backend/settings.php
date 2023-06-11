@@ -69,10 +69,10 @@
         if ($uploadOk == 0) {
             $error = 'Sorry your file was not uploaded';
         } else {
-            //If everything is ok, then upload the file
+            // If everything is ok, then upload the file
             if (move_uploaded_file($_FILES["camIcon"]["tmp_name"], $target_file)) {
                 $done = 'Your profile picture has been uploaded';
-            }else{
+            } else {
                 $error = "Sorry there was an error in uploading your file";
             }
         }
