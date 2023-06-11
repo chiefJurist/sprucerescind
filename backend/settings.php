@@ -30,6 +30,53 @@
         session_destroy();
         header("Location: login.php");
     }
+
+
+    //FOR THE IMAGE UPLOAD
+    //Errors Variable;
+    $error = "";
+    $done = "";
+
+    //If submitted
+    if (isset($_POST["image"]) && isset($_FILES['camIcon']) && !empty($_FILES['camIcon']['name'])) {
+        $target_dir = 'uploads/';
+        $target_file = $target_dir . basename($_FILES['camIcon']['name']);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        //Check If the image is an actual image
+        $check = getimagesize($_FILES["camIcon"]["tmp_name"]);
+        if ($check !== false) {
+            $uploadOk = 1;
+        }else {
+            $error = 'file is not an image';
+            $uploadOk = 0;
+        }
+
+        //Limit file size (2000kb)
+        if ($_FILES["camIcon"]["size"] > 2000000) {
+            $error = "Sorry, your file size is too large <br>";
+            $uploadOk = 0;
+        }
+
+        //Limit file type
+        if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif") {
+            $error = 'Sorry, only JPG, JPEG, PNG and GIF files are allowed <br>';
+            $uploadOk = 0;
+        }
+
+        //Check if there is an error
+        if ($uploadOk == 0) {
+            $error = 'Sorry your file was not uploaded';
+        } else {
+            //If everything is ok, then upload the file
+            if (move_uploaded_file($_FILES["camIcon"]["tmp_name"], $target_file)) {
+                $done = 'Your profile picture has been uploaded';
+            }else{
+                $error = "Sorry there was an error in uploading your file";
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -189,6 +236,23 @@
                 font-size: 3rem;
                 color: blueviolet;
             }
+            #image{
+                background-color: blueviolet;
+                color: white;
+                border: none;
+                outline: none;
+                border-radius: 50%;
+                padding: 20px 2px;
+                font-weight: bold;
+            }
+            .errors{
+                text-align: center;
+                color: red;
+            }
+            .done{
+                text-align: center;
+                color: green;
+            }
         </style>
     </head>
     <body>
@@ -217,6 +281,9 @@
            <div id="cam-div">
                 <label for="camIcon" class="custom-file-button"><span><ion-icon name="camera-outline" class="camera"></ion-icon></span></label>
                 <input type="file" name="camIcon" id="camIcon">
+                <input type="submit" value="UPDATE" name="image" id="image">
+                <div class="errors"><?php echo $error ?></div>
+                <div class="done"><?php echo $done ?></div>
            </div>
         </form>
 
