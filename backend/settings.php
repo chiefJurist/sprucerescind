@@ -146,6 +146,8 @@
             .expand{
                 font-size: 2rem;
             }
+            
+            /*IMAGE PART */
             #img-pos{
                 display: flex;
                 justify-content: center;
@@ -160,7 +162,7 @@
                 border: 2px solid blueviolet;
                 width: 200px;
                 height: 200px;
-                background-color: white;
+                background-color: rgb(255, 248, 255);
                 overflow: hidden;
                 margin-top: 30px;
             }
@@ -180,6 +182,8 @@
             border: none;
             cursor: pointer;
             margin-left: 150px;
+            margin-top: -50px;
+            background-color: rgb(255, 248, 255);
             }
             .camera{
                 font-size: 3rem;
@@ -207,7 +211,7 @@
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data" id="cam-form">
            <div id="img-pos">
                 <div id="img-div">
-                    <img src="mastercard.png" alt="">
+                    <img src="" alt="">
                 </div>
            </div>
            <div id="cam-div">
