@@ -3,11 +3,11 @@
     include("config/connect.php");
 
     //Setting The Errors Array
-    $errors = ["account" => "", "email" => "", "password" => "", "otp" => ""];
+    $errors = ["account" => "", "email" => "", "password" => ""];
 
 
     //CREATING VARIABLES TO STORE THE INPUTS
-    $email = $password = $password2 = $otp = $done = "";
+    $email = $password = $password2 = "";
 
 
 
@@ -20,7 +20,7 @@
 
         //Validate the email
         if (empty($email)) {
-            $errors['email'] = "Please input you email";
+            $errors['email'] = "Please input your email";
             return;
         }else {
             // check if the user already has an account
@@ -49,39 +49,17 @@
             $subject = "PASSWORD RESET NOTIFICATION";
             $message = "Your one time password for reseting your password is $otpCode . Please contact support if this action was not initiated by you";
             $header = "From: admin@sprucerescind.com \r\n";
-            mail($to, $subject, $message, $header);
-            $done = "OTP sent succesfully";
-        }
-    }
-
-    //IF THE PASSWORD CHANGE BUTTON IS CLICKED
-    if (isset($_POST["submit"])) {
-        //Giving otp values
-        $otp = $_POST["otp"];
-
-        //Validate OTP
-        if ($otp == $otpCode) {
-            $errors["otp"] = "Please fill the form correctly and input the OTP sent to your email";
-        }
-
-        //Save to database amd redirect if there is no error
-        if (!array_filter($errors)) {
-            //hash the password
-            $hashed = password_hash($password, PASSWORD_DEFAULT);
-            $hash = mysqli_real_escape_string($conn, $hashed);
+            //mail($to, $subject, $message, $header);
             
-            $sql2 = " UPDATE users SET password='$hash' WHERE email=$email";
-            if (mysqli_query($conn, $sql2)) {
-                //success
-                header("Location: login.php");
-            }
-            
-            //free result from memory
-            mysqli_free_result($result);
+            // Store the email and password in the session
+            session_start();
+            $_SESSION['email'] = $email;
+            $_SESSION['password'] = $password;
 
-            //close connection and exit
-            mysqli_close($conn);
-            exit();
+            //The redirect url
+            $redirectURL = "otp.php?otpCode=$otpCode&email=";
+
+            header("Location: $redirectURL");
         }
     }
 ?>
@@ -157,10 +135,9 @@
     </head>
     <body>
         <div id="log-in">
-            <p>INPUT YOUR EMAIL TO RESET YOUR PASSWORD</p>
+            <p>FILL THE FORM TO RESET YOUR PASSWORD</p>
             <form action="forgotPassword.php" method="post">
                 <div class="errors"><?php echo $errors['account'] ?></div>
-                <div class="done"><?php echo $done ?></div>
                 <div class="input-field">
                     <label class="in-label">E-mail</label><br>
                     <input type="email" name="email" class="in-input" placeholder="Your Email" value="<?php echo $email ?>" required>
@@ -181,16 +158,6 @@
 
                 <div id="btn-div2">
                     <input type="submit" value="REQUEST OTP" name="request" class="btn">
-                </div>
-
-                <div class="input-field">
-                    <label class="in-label">Input OTP</label><br>
-                    <input type="password" name="otp" placeholder="Input OTP code" class="in-input">
-                </div>
-                <div class="errors"><?php echo $errors['otp'] ?></div>
-
-                <div id="btn-div">
-                    <input type="submit" value="CHANGE PASSWORD" name="submit" class="btn">
                 </div>
             </form>
         </div>
