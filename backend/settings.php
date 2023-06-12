@@ -33,49 +33,56 @@
 
 
     //FOR THE IMAGE UPLOAD
-    //Errors Variable;
-    $error = "";
-    $done = "";
+    $errors = "";
 
     //If submitted
     if (isset($_POST["image"]) && isset($_FILES['camIcon']) && !empty($_FILES['camIcon']['name'])) {
-        $target_dir = 'uploads/';
-        $target_file = $target_dir . basename($_FILES['camIcon']['name']);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        echo "<pre>" ;
+        print_r($_FILES['camIcon']);
+        echo "</pre>";
+        
+        $img_name = $_FILES['camIcon']['name'];
+        $img_size = $_FILES['camIcon']['size'];
+        $tmp_name = $_FILES['camIcon']['tmp_name'];
+        $error = $_FILES['camIcon']['error'];
 
-        //Check If the image is an actual image
-        $check = getimagesize($_FILES["camIcon"]["tmp_name"]);
-        if ($check !== false) {
-            $uploadOk = 1;
-        }else {
-            $error = 'file is not an image';
-            $uploadOk = 0;
-        }
+        if ($error === 0) {
+            if ($img_size > 2000000) {
+                $errors = "Sorry your file is too large";
+            }else {
+                $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
 
-        //Limit file size (2000kb)
-        if ($_FILES["camIcon"]["size"] > 2000000) {
-            $error = "Sorry, your file size is too large <br>";
-            $uploadOk = 0;
-        }
+                $allowed_exs = array("jpg", "jpeg", "png");
 
-        //Limit file type
-        if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif") {
-            $error = 'Sorry, only JPG, JPEG, PNG and GIF files are allowed <br>';
-            $uploadOk = 0;
-        }
+                if (in_array($img_ex_lc, $allowed_exs)) {
+                    $new_img_name = uniqid("IMG-", true). "." .$img_ex_lc;
+                    $img_upload_path = "uploads/".$new_img_name;
 
-        //Check if there is an error
-        if ($uploadOk == 0) {
-            $error = 'Sorry your file was not uploaded';
-        } else {
-            // If everything is ok, then upload the file
-            if (move_uploaded_file($_FILES["camIcon"]["tmp_name"], $target_file)) {
-                $done = 'Your profile picture has been uploaded';
-            } else {
-                $error = "Sorry there was an error in uploading your file";
+                    move_uploaded_file($tmp_name, $img_upload_path);
+
+                    //Insert into database
+                    $sql = "INSERT INTO images(image_url, user_id) VALUES('$new_img_name', $id)";
+                    if (mysqli_query($conn, $sql)) {
+                        # Success.
+                        header("Location: dashboard.php");
+                    }
+                }else {
+                    $errors = "You cannot upload image of this format";
+                }
             }
+        }else {
+            $errors= "An unknown error occured";
         }
+    }
+
+    //Getting the image
+    $sql = "SELECT * FROM images WHERE user_id = '$id'";
+    $result = mysqli_query($conn, $sql);
+    $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    
+    foreach ($images as $image) {
+        $src = $image['image_url'];
     }
 ?>
 
@@ -249,10 +256,6 @@
                 text-align: center;
                 color: red;
             }
-            .done{
-                text-align: center;
-                color: green;
-            }
         </style>
     </head>
     <body>
@@ -275,15 +278,14 @@
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data" id="cam-form">
            <div id="img-pos">
                 <div id="img-div">
-                    <img src="" alt="">
+                    <img src="<?php echo'uploads/'.$src ?>" alt="">
                 </div>
            </div>
            <div id="cam-div">
                 <label for="camIcon" class="custom-file-button"><span><ion-icon name="camera-outline" class="camera"></ion-icon></span></label>
                 <input type="file" name="camIcon" id="camIcon">
                 <input type="submit" value="UPDATE" name="image" id="image">
-                <div class="errors"><?php echo $error ?></div>
-                <div class="done"><?php echo $done ?></div>
+                <div class="errors"><?php echo $errors ?></div>
            </div>
         </form>
 
