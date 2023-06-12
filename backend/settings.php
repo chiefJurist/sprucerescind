@@ -34,6 +34,7 @@
 
     //FOR THE IMAGE UPLOAD
     $errors = "";
+    $src = "";
 
     //If submitted
     if (isset($_POST["image"]) && isset($_FILES['camIcon']) && !empty($_FILES['camIcon']['name'])) {
@@ -79,11 +80,9 @@
     //Getting the image
     $sql = "SELECT * FROM images WHERE user_id = '$id'";
     $result = mysqli_query($conn, $sql);
-    $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $images = mysqli_fetch_assoc($result);
     
-    foreach ($images as $image) {
-        $src = $image['image_url'];
-    }
+    $src = $images['image_url'];
 
     //free result from memory
     mysqli_free_result($result);
