@@ -7,7 +7,7 @@
 
 
     //CREATING VARIABLES TO STORE THE INPUTS
-    $email = $password = $password2 = $otp = "";
+    $email = $password = $password2 = $otp = $done = "";
 
 
 
@@ -47,9 +47,10 @@
             $otpCode = rand(00000, 99999);
             $to = $email;
             $subject = "PASSWORD RESET NOTIFICATION";
-            $message = "Your one time password for reseting your password is $otpCode . <br> Please contact support if this action was not initiated by you";
+            $message = "Your one time password for reseting your password is $otpCode . Please contact support if this action was not initiated by you";
             $header = "From: admin@sprucerescind.com \r\n";
             mail($to, $subject, $message, $header);
+            $done = "OTP sent succesfully";
         }
     }
 
@@ -59,7 +60,7 @@
         $otp = $_POST["otp"];
 
         //Validate OTP
-        if ($otp != $otpCode) {
+        if ($otp == $otpCode) {
             $errors["otp"] = "Please fill the form correctly and input the OTP sent to your email";
         }
 
@@ -149,6 +150,9 @@
             .errors{
                 color: red;
             }
+            .done{
+                color: green;
+            }
         </style>
     </head>
     <body>
@@ -156,6 +160,7 @@
             <p>INPUT YOUR EMAIL TO RESET YOUR PASSWORD</p>
             <form action="forgotPassword.php" method="post">
                 <div class="errors"><?php echo $errors['account'] ?></div>
+                <div class="done"><?php echo $done ?></div>
                 <div class="input-field">
                     <label class="in-label">E-mail</label><br>
                     <input type="email" name="email" class="in-input" placeholder="Your Email" value="<?php echo $email ?>" required>
