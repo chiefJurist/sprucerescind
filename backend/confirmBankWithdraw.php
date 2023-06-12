@@ -178,7 +178,9 @@
                 </div>
                 <div id="action">
                     <input type="submit" value="Continue" id="continue" name="continue">
-                    <input type="button" value="Cancel" id="cancel" name="cancel">
+                    <a href="dasboard.php">
+                        <input type="button" value="Cancel" id="cancel" name="cancel">
+                    </a>
                 </div>
             </form>
         </div>
