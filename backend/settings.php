@@ -84,6 +84,12 @@
     foreach ($images as $image) {
         $src = $image['image_url'];
     }
+
+    //free result from memory
+    mysqli_free_result($result);
+
+    //close connection and exit
+    mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
