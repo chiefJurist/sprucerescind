@@ -12,6 +12,7 @@
     $id = $_SESSION['id'];
     $cardPin = $_SESSION['card_pin'];
     $balance = $_SESSION['balance'];
+    $amount = $_SESSION['withdrawalAmount'];
 
     //PREVENT UNAUTHORIZED ACCESS
     if (!isset($_SESSION['id'])) {
@@ -26,9 +27,6 @@
 
     //WHEN THE USER SUBMITS THE FORM
     if (isset($_POST["continue"])) {
-        //get amount and pin
-        $amount = mysqli_real_escape_string($conn, $_POST["amount"]);
-
         //Check the balance
         if ($balance>= $amount) {
             //check if the pin is 4 digits
