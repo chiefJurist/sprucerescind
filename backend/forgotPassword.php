@@ -49,7 +49,7 @@
             $subject = "PASSWORD RESET NOTIFICATION";
             $message = "Your one time password for reseting your password is $otpCode . Please contact support if this action was not initiated by you";
             $header = "From: admin@sprucerescind.com \r\n";
-            //mail($to, $subject, $message, $header);
+            mail($to, $subject, $message, $header);
             
             // Store the email and password in the session
             session_start();
