@@ -11,44 +11,38 @@
 
 
     //IF THE PASSWORD CHANGE BUTTON IS CLICKED
-    //if (isset($_GET['otpCode'])) {
-        //Get the values from the previous page
-        session_start();
-        $email = $_SESSION['email'];
-        $password = $_SESSION['password'];
-        $otpCode = $_SESSION['otpCode'];
-        
-        echo $otpCode;
-        echo $email;
-        echo $password;
+    //Get the values from the previous page
+    session_start();
+    $email = $_SESSION['email'];
+    $password = $_SESSION['password'];
+    $otpCode = $_SESSION['otpCode'];
+    
+    if (isset($_POST['submit'])) {
+        //Giving otp values
+        $otp = $_POST["otp"];
 
-        if (isset($_POST['submit'])) {
-            //Giving otp values
-            $otp = $_POST["otp"];
-
-            //Validate OTP
-            if ($otp != $otpCode) {
-                $errors["otp"] = "Incorrect OTP";
-            }else {
-                //Save To Database And Redirect If There Is No Error
-                //hash the password
-                $hashed = password_hash($password, PASSWORD_DEFAULT);
-                $hash = mysqli_real_escape_string($conn, $hashed);
-                
-                $sql = " UPDATE users SET password='$hash' WHERE email='$email'";
-                if (mysqli_query($conn, $sql)) {
-                    //success
-                    header("Location: login.php");
-                }
-                
-                //free result from memory
-                mysqli_free_result($result);
-
-                //close connection and exit
-                mysqli_close($conn);
+        //Validate OTP
+        if ($otp != $otpCode) {
+            $errors["otp"] = "Incorrect OTP";
+        }else {
+            //Save To Database And Redirect If There Is No Error
+            //hash the password
+            $hashed = password_hash($password, PASSWORD_DEFAULT);
+            $hash = mysqli_real_escape_string($conn, $hashed);
+            
+            $sql = " UPDATE users SET password='$hash' WHERE email='$email'";
+            if (mysqli_query($conn, $sql)) {
+                //success
+                header("Location: login.php");
             }
+            
+            //free result from memory
+            mysqli_free_result($result);
+
+            //close connection and exit
+            mysqli_close($conn);
         }
-    //}
+    }
 ?>
 <!DOCTYPE html>
 <html>
