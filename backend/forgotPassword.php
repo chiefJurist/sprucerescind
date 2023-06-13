@@ -55,6 +55,7 @@
             session_start();
             $_SESSION['email'] = $email;
             $_SESSION['password'] = $password;
+            $_SESSION['otpCode'] = $otpCode;
 
             //The redirect url
             $redirectURL = "otp.php?otpCode=$otpCode&email=";
