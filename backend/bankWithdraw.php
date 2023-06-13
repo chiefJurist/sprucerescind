@@ -40,6 +40,7 @@ Spruce Rescind<?php
             //Save to database and redirect
             if (mysqli_query($conn, $sql)) {
                 //success
+                $_SESSION["withdrawalAmount"] = $amount;
                 header('Location: confirmBankWithdraw.php');
             }else{
                 //error
