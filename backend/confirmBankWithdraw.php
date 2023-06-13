@@ -103,20 +103,6 @@
                 display: flex;
                 justify-content: space-between;
             }
-            #amount{
-                font-size: large;
-                border: none;
-                outline: none;
-                width: 80%;
-                font-size: large;
-            }
-            #confirm>p{
-                padding-bottom: 5px;
-                border-bottom: 1px solid #444;
-                width: 80%;
-                font-size: large;
-                margin-left: 10%;
-            }
             #continue{
                 background-color: #444;
                 color: white;
@@ -171,9 +157,6 @@
                 <div class="errors"><?php echo $errors["connection"] ?></div>
                 <div id="instruction">Enter your virtual card pin to complete transaction</div>
                 <div id="input-div"><input type="password" name="pin" id="input" maxlength="4" required></div>
-                <div id="confirm">
-                    <p>$ <input type="number" id="amount" placeholder="Confirm Amount" name="amount" required></p>
-                </div>
                 <div id="action">
                     <input type="submit" value="Continue" id="continue" name="continue">
                     <a href="dasboard.php">
