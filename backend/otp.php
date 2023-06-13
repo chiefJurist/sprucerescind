@@ -16,7 +16,7 @@
     $email = $_SESSION['email'];
     $password = $_SESSION['password'];
     $otpCode = $_SESSION['otpCode'];
-    
+
     if (isset($_POST['submit'])) {
         //Giving otp values
         $otp = $_POST["otp"];
@@ -33,6 +33,8 @@
             $sql = " UPDATE users SET password='$hash' WHERE email='$email'";
             if (mysqli_query($conn, $sql)) {
                 //success
+                session_unset();
+                session_destroy();
                 header("Location: login.php");
             }
             
